@@ -54,8 +54,8 @@
                                         <td>{{$x++}}</td>
                                         <td>{{$item->date ?? 'tidak diketahui'}}</td>
                                         <td>{{$item->airline->name}}</td>
-                                        <td>{{$item->city->name}}</td>
-                                        <td>{{$item->city->name}}</td>
+                                        <td>{{$item->fromCity->name}}</td>
+                                        <td>{{$item->toCity->name}}</td>
                                         <td>{{$item->arrival}}</td>
                                         <td>{{$item->actual}}</td>
                                         <td>

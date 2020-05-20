@@ -16,7 +16,7 @@ class FlightStatusController extends Controller
      */
     public function index()
     {
-        $status = FlightStatus::with('city')->with('airline')->get();
+        $status = FlightStatus::with('fromCity')->with('toCity')->with('airline')->get();
         return view('admin.flight.index',compact('status'));
     }
 
