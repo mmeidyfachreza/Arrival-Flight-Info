@@ -1,29 +1,6 @@
 @extends('admin.layout')
 
-@section('content')
-<header class="header sticky-top">
-    <nav class="navbar navbar-expand-lg bg-white border-bottom py-0">
-        <div class="container"><a href="#" class="navbar-brand py-1"><img src="img/logo.png" alt=""
-                    class="img-fluid"></a>
-            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                class="navbar-toggler navbar-toggler-right"><span class="fas fa-bars"></span></button>
-            <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto px-3">
-                    <li class="nav-item active"><a href="#intro" class="nav-link text-uppercase link-scroll">Home </a>
-                    </li>
-                    <li class="nav-item"><a href="#about" class="nav-link text-uppercase link-scroll">Jadwal</a></li>
-                    <li class="nav-item"><a href="#services" class="nav-link text-uppercase link-scroll">Tujuan</a>
-                    </li>
-                    <li class="nav-item"><a href="#portfolio" class="nav-link text-uppercase link-scroll">Maskapai</a>
-                    </li>
-                    <li class="nav-item"><a href="#portfolio" class="nav-link text-uppercase link-scroll">Keluar</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+@section('content2')
 <section id="contact">
     <div class="container">
         <header class="text-center mb-5">
@@ -31,7 +8,12 @@
         </header>
         <div class="row">
             <div class="col-lg-12">
+                @isset($status)
+                <form action="{{route('status.update',$status->id)}}" method="POST" class="contact-form">
+                @method('PUT')
+                @else
                 <form action="{{route('status.store')}}" method="POST" class="contact-form">
+                @endisset
                     @csrf
                     <div class="form-group">
                         <label for="Maskapai">Maskapai *</label>
@@ -87,11 +69,11 @@
                         </div>
                         <div class="form-group col-lg-6">
                             <label>kedatangan *</label>
-                            <input type="datetime-local" name="arrival" class="form-control">
+                            <input type="datetime-local" name="arrival" class="form-control" value="{{date('Y-m-d\TH:i', strtotime($status->arrival ?? ' '))}}">
                         </div>
                         <div class="form-group col-lg-6">
                             <label>Actual *</label>
-                            <input type="datetime-local" name="actual" class="form-control">
+                            <input type="datetime-local" name="actual" class="form-control" value="{{date('Y-m-d\TH:i', strtotime($status->actual ?? ' '))}}">
                         </div>
                         <div class="form-group col-lg-12">
                             <button type="submit" class="btn btn-outline-primary w-100">Simpan</button>

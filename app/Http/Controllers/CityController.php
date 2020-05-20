@@ -26,7 +26,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('amdin.city.create');
+        return view('admin.city.form');
     }
 
     /**
@@ -37,8 +37,8 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        City::store($request->all());
-        return redirect()->route('jadwal.index')->with('success','Berhasil menambah data');
+        City::create($request->all());
+        return redirect()->route('kota.index')->with('success','Berhasil menambah data');
     }
 
     /**
@@ -62,7 +62,7 @@ class CityController extends Controller
     public function edit($id)
     {
         $city = City::findOrFail();
-        return view('admin.city.index',compact('city'));
+        return view('admin.city.form',compact('city'));
     }
 
     /**
@@ -74,8 +74,9 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        City::update($request->all());
-        return redirect()->route('jadwal.index')->with('success','Berhasil merubah data');
+        $city = City::findOrFail($id);
+        $city->update($request->all());
+        return redirect()->route('kota.index')->with('success','Berhasil merubah data');
     }
 
     /**
@@ -88,7 +89,7 @@ class CityController extends Controller
     {
         $city=City::findOrFail($id);
         $city->delete();
-        return redirect()->route('city.index')->with('success','Berhasil menghapus data');
+        return redirect()->route('kota.index')->with('success','Berhasil menghapus data');
     }
 
     public function loadData(Request $request)

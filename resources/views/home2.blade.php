@@ -2,6 +2,7 @@
 
 @section('content')
 <!-- Hero Section-->
+
 <section id="intro" style="background: url(img/startup-room.jpg)" class="hero bg-cover">
     <div class="overlay"></div>
     <div class="content h-100 d-flex align-items-center">
@@ -18,7 +19,7 @@
 <!-- navbar-->
 <header class="header sticky-top">
     <nav class="navbar navbar-expand-lg bg-white border-bottom py-0">
-        <div class="container"><a href="#" class="navbar-brand py-1"><img src="img/logo.png" alt=""
+        <div class="container"><a href="{{url('/')}}" class="navbar-brand py-1"><img src="{{asset('template/img/logo.jpg')}}" alt="asd"
                     class="img-fluid"></a>
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -32,6 +33,7 @@
                     <li class="nav-item"><a href="{{route('login')}}"
                         class="nav-link text-uppercase link-scroll">Login</a></li>
                     @else
+                    <li class="nav-item"><a href="{{url('/admin')}}" class="nav-link text-uppercase link-scroll">Admin</a></li>
                     <li class="nav-item"><a href="{{route('logout')}}"
                         class="nav-link text-uppercase link-scroll" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Logout</a></li>
@@ -46,11 +48,12 @@
     </nav>
 </header>
 <!-- Services Section-->
-<section id="services" class="bg-gray">
+<section id="status" class="bg-gray">
     <div class="container">
         <header class="text-center mb-5">
             <h2 class="lined text-uppercase">Jadwal kedatangan</h2>
         </header>
+        <br>
         <div style="">
 
             <div class="card">
@@ -61,20 +64,20 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <select class="select-dari form-control"
-                                        name="dari" style="width: 100%"></select>
+                                        name="from" style="width: 100%"></select>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <select class="select-tujuan form-control" style="width: 100%"
-                                        name="tujuan"></select>
+                                        name="to"></select>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <input type="text" name="date" placeholder="Masukan Nomor Induk Siswa"
+                                    <input type="date" name="date" placeholder="Masukan Nomor Induk Siswa"
                                         class="form-control input-datepicker-autoclose"
-                                        value="{{old('date', $health->date ?? '01/01/2020')}}" required>
+                                        value="{{old('date', $health->date ?? '01/01/2020')}}">
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 text-center">
@@ -87,17 +90,53 @@
 
     </div>
     <br>
-    @foreach ($status as $data)
+    <div class="bg-white mb-4 p-4" style="width: 100%">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Maskapai</th>
+                        <th class="text-center">Dari</th>
+                        <th class="text-center">Tujuan</th>
+                        <th class="text-center">Arrival</th>
+                        <th class="text-center">Actual</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $x=1;?>
+                    @foreach ($status as $item)
+                    <tr>
+                        <td class="text-center">{{date('Y-m-d', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
+                        <td class="text-center">{{$item->airline->name}}</td>
+                        <td class="text-center">{{$item->fromCity->name}}</td>
+                        <td class="text-center">{{$item->toCity->name}}</td>
+                        <td class="text-center">{{$item->arrival}}</td>
+                        <td class="text-center">{{$item->actual}}</td>
+                        <td class="text-center">Delay 5 menit</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{-- @foreach ($status as $data)
     <div class="bg-white mb-4 p-4" style="width: 100%">
         <div class="row">
             <div class="col-lg-3">
                 <div class="icon mb-3"><i class="fas fa-plane"></i></div>
                 <h5 class="text-uppercase font-weight-bold">{{$data->airline->name}}</h4>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
+                <h5 class="text-uppercase font-weight-bold">27-23-2020</h4>
+                <p class="small text-gray">Tanggal</p>
+            </div>
+            <div class="col-lg-2">
             <h4 class="text-uppercase font-weight-bold">{{$data->fromCity->name}}</h4>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <h4 class="text-uppercase font-weight-bold">{{$data->toCity->name}}</h4>
             </div>
             <div class="col-lg-3">
@@ -106,12 +145,11 @@
             </div>
         </div>
     </div>
-    @endforeach
-
+    @endforeach --}}
 </div>
 </section>
 <!-- Text Section-->
-<section id="text" class="bg-gray">
+<section id="about">
     <div class="container">
         <header class="text-center mb-5">
             <h2 class="lined text-uppercase">Text Page</h2>

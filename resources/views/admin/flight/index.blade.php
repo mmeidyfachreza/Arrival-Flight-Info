@@ -42,7 +42,7 @@
                                         <th>Maskapai</th>
                                         <th>Dari</th>
                                         <th>Tujuan</th>
-                                        <th>Kedatangan</th>
+                                        <th>Arrival</th>
                                         <th>Actual</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -52,7 +52,7 @@
                                     @foreach ($status as $item)
                                     <tr>
                                         <td>{{$x++}}</td>
-                                        <td>{{$item->date ?? 'tidak diketahui'}}</td>
+                                        <td>{{date('Y-m-d', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
                                         <td>{{$item->airline->name}}</td>
                                         <td>{{$item->fromCity->name}}</td>
                                         <td>{{$item->toCity->name}}</td>

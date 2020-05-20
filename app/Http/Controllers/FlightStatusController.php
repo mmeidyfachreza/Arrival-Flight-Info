@@ -41,7 +41,7 @@ class FlightStatusController extends Controller
     public function store(Request $request)
     {
         FlightStatus::create($request->all());
-        return redirect()->route('status.index')->with('success','Berhasil menghapus data');
+        return redirect()->route('status.index')->with('success','Berhasil menambah data');
     }
 
     /**
@@ -81,7 +81,8 @@ class FlightStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        FlightStatus::update($request->all());
+        $status = FlightStatus::findOrFail($id);
+        $status->update($request->all());
         return redirect()->route('status.index')->with('success','Berhasil merubah data');
     }
 

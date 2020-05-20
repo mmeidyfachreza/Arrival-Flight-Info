@@ -36,8 +36,8 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        Airline::store($request->all());
-        return redirect()->route('jadwal.index')->with('success','Berhasil menambah data');
+        Airline::create($request->all());
+        return redirect()->route('maskapai.index')->with('success','Berhasil menambah data');
     }
 
     /**
@@ -61,7 +61,7 @@ class AirlineController extends Controller
     public function edit($id)
     {
         $airline=Airline::findOrFail($id);
-        return view('admin.maskapai.form',compact('airline'));
+        return view('admin.airline.form',compact('airline'));
     }
 
     /**
@@ -73,8 +73,9 @@ class AirlineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Airline::store($request->all());
-        return redirect()->route('jadwal.index')->with('success','Berhasil merubah data');
+        $airline=Airline::findOrFail($id);
+        $airline->update($request->all());
+        return redirect()->route('maskapai.index')->with('success','Berhasil merubah data');
     }
 
     /**

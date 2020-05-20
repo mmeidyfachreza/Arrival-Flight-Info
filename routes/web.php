@@ -11,20 +11,21 @@
 |
 */
 
-Route::get('/','HomeController@index');
+Route::get('/','HomeController@index')->name('home');
 Route::get('/tes',function()
 {
     return view('auth.login2');
 });
 
 Route::get('/cari', 'CityController@loadData');
-Route::post('/cari-jadwal', 'FlightStatusController@search')->name('search.flight');
+Route::post('/cari-jadwal', 'HomeController@search')->name('search.flight');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
+    Route::get('/', 'HomeController@indexAdmin')->name('admin.home');
     Route::resource('status', 'FlightStatusController');
     Route::resource('maskapai', 'AirlineController');
     Route::resource('kota', 'CityController');
