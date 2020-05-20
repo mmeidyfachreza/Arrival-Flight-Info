@@ -95,10 +95,10 @@
                 <h5 class="text-uppercase font-weight-bold">{{$data->airline->name}}</h4>
             </div>
             <div class="col-lg-3">
-            <h4 class="text-uppercase font-weight-bold">{{$data->city->name}}</h4>
+            <h4 class="text-uppercase font-weight-bold">{{$data->fromCity->name}}</h4>
             </div>
             <div class="col-lg-3">
-                <h4 class="text-uppercase font-weight-bold">{{$data->city->name}}</h4>
+                <h4 class="text-uppercase font-weight-bold">{{$data->toCity->name}}</h4>
             </div>
             <div class="col-lg-3">
                 <h5 class="text-uppercase font-weight-bold">5 menit</h4>

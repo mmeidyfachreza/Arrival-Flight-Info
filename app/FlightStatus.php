@@ -13,8 +13,13 @@ class FlightStatus extends Model
         return $this->belongsTo('App\Airline','airline_id');
     }
 
-    public function city()
+    public function fromCity()
     {
-        return $this->belongsTo('App\City');
+        return $this->belongsTo('App\City','from');
+    }
+
+    public function toCity()
+    {
+        return $this->belongsTo('App\City','to');
     }
 }
