@@ -16,9 +16,8 @@ class FlightHistoriesController extends Controller
      */
     public function index()
     {
-        $destinations = Destination::all();
-        $history = FlightHistories::where('activity','=','arrival')->get();
-        return view('home2',compact('history','destinations'));
+        $history = FlightHistories::with('destination')->with('airline')->get();
+        return view('admin.flight.index',compact('history'));
     }
 
     /**
@@ -42,7 +41,7 @@ class FlightHistoriesController extends Controller
     public function store(Request $request)
     {
         FlightHistories::create($request->all());
-        return redirect()->route('jadwal.create')->with('success','berhasil');
+        return redirect()->route('jadwal.index')->with('success','Berhasil menghapus data');
     }
 
     /**
@@ -51,9 +50,12 @@ class FlightHistoriesController extends Controller
      * @param  \App\FlightHistories  $flightHistories
      * @return \Illuminate\Http\Response
      */
-    public function show(FlightHistories $flightHistories)
+    public function show($id)
     {
-        //
+        $jadwal = FlightHistories::findOrFail($id);
+        $destinations = Destination::all();
+        $airlines = Airline::all();
+        //return view('admin.flight.form',compact('jadwal','destinations','airlines'));
     }
 
     /**
@@ -62,9 +64,12 @@ class FlightHistoriesController extends Controller
      * @param  \App\FlightHistories  $flightHistories
      * @return \Illuminate\Http\Response
      */
-    public function edit(FlightHistories $flightHistories)
+    public function edit($id)
     {
-        //
+        $jadwal = FlightHistories::findOrFail($id);
+        $destinations = Destination::all();
+        $airlines = Airline::all();
+        return view('admin.flight.form',compact('jadwal','destinations','airlines'));
     }
 
     /**
@@ -74,9 +79,10 @@ class FlightHistoriesController extends Controller
      * @param  \App\FlightHistories  $flightHistories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FlightHistories $flightHistories)
+    public function update(Request $request, $id)
     {
-        //
+        FlightHistories::update($request->all());
+        return redirect()->route('jadwal.index')->with('success','Berhasil merubah data');
     }
 
     /**
@@ -85,8 +91,15 @@ class FlightHistoriesController extends Controller
      * @param  \App\FlightHistories  $flightHistories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FlightHistories $flightHistories)
+    public function destroy($id)
     {
-        //
+        $jadwal=FlightHistories::find($id);
+        $jadwal->delete();
+        return redirect()->route('jadwal.index')->with('success','Berhasil menghapus data');
+    }
+
+    public function search(Request $request)
+    {
+        dd($request->all());
     }
 }

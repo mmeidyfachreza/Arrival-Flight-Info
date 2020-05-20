@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DestinationController extends Controller
 {
@@ -14,7 +15,8 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        //
+        $tujuan = Destination::all();
+        return view('admin.destination.index',compact('tujuan'));
     }
 
     /**
@@ -24,7 +26,7 @@ class DestinationController extends Controller
      */
     public function create()
     {
-        //
+        return view('amdin.destination.create');
     }
 
     /**
@@ -35,7 +37,8 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Destination::store($request->all());
+        return redirect()->route('jadwal.index')->with('success','Berhasil menambah data');
     }
 
     /**
@@ -44,9 +47,10 @@ class DestinationController extends Controller
      * @param  \App\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function show(Destination $destination)
+    public function show($id)
     {
-        //
+        $tujuan = Destination::findOrFail($id);
+        //return view('admin.destination.index',compact('tujuan'));
     }
 
     /**
@@ -55,9 +59,10 @@ class DestinationController extends Controller
      * @param  \App\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function edit(Destination $destination)
+    public function edit($id)
     {
-        //
+        $tujuan = Destination::findOrFail();
+        return view('admin.destination.index',compact('tujuan'));
     }
 
     /**
@@ -67,9 +72,10 @@ class DestinationController extends Controller
      * @param  \App\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Destination $destination)
+    public function update(Request $request, $id)
     {
-        //
+        Destination::update($request->all());
+        return redirect()->route('jadwal.index')->with('success','Berhasil merubah data');
     }
 
     /**
@@ -78,8 +84,19 @@ class DestinationController extends Controller
      * @param  \App\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Destination $destination)
+    public function destroy($id)
     {
-        //
+        $tujuan=Destination::findOrFail($id);
+        $tujuan->delete();
+        return redirect()->route('tujuan.index')->with('success','Berhasil menghapus data');
+    }
+
+    public function loadData(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('destinations')->select('id', 'name')->where('name', 'LIKE', '%'.$cari.'%')->get();
+            return response()->json($data);
+        }
     }
 }

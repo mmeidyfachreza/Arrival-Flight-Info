@@ -14,7 +14,8 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        //
+        $airlines = Airline::all();
+        return view('admin.airline.index',compact('airlines'));
     }
 
     /**
@@ -24,7 +25,7 @@ class AirlineController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.airline.form');
     }
 
     /**
@@ -35,7 +36,8 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Airline::store($request->all());
+        return redirect()->route('jadwal.index')->with('success','Berhasil menambah data');
     }
 
     /**
@@ -44,9 +46,10 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function show(Airline $airline)
+    public function show($id)
     {
-        //
+        $airline=Airline::findOrFail($id);
+        //return view('admin.maskapai.form',compact('airline'));
     }
 
     /**
@@ -55,9 +58,10 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function edit(Airline $airline)
+    public function edit($id)
     {
-        //
+        $airline=Airline::findOrFail($id);
+        return view('admin.maskapai.form',compact('airline'));
     }
 
     /**
@@ -67,9 +71,10 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Airline $airline)
+    public function update(Request $request, $id)
     {
-        //
+        Airline::store($request->all());
+        return redirect()->route('jadwal.index')->with('success','Berhasil merubah data');
     }
 
     /**
@@ -78,8 +83,10 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Airline $airline)
+    public function destroy($id)
     {
-        //
+        $maskapai=Airline::findOrFail($id);
+        $maskapai->delete();
+        return redirect()->route('maskapai.index')->with('success','Berhasil menghapus data');
     }
 }

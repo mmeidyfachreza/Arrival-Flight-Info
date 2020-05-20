@@ -11,9 +11,21 @@
 |
 */
 
-Route::get('/','FlightHistoriesController@index');
-Route::resource('jadwal', 'FlightHistoriesController');
+Route::get('/','HomeController@index');
+Route::get('/tes',function()
+{
+    return view('auth.login2');
+});
+
+Route::get('/cari', 'CityController@loadData');
+Route::post('/cari-jadwal', 'FlightStatusController@search')->name('search.flight');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
+    Route::resource('status', 'FlightStatusController');
+    Route::resource('maskapai', 'AirlineController');
+    Route::resource('kota', 'CityController');
+});

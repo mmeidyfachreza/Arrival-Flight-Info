@@ -1,6 +1,6 @@
 <?php
 
-use App\Destination;
+use App\City;
 use Illuminate\Database\Seeder;
 
 class TableDestinationsSeeder extends Seeder
@@ -14,7 +14,7 @@ class TableDestinationsSeeder extends Seeder
     {
         $array = ['Bandung','Yogyakarta','Semarang'];
         foreach ($array as $item) {
-            Destination::create(['name'=>$item]);
+            City::create(['name'=>$item]);
         }
     }
 }

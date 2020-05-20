@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+     <!-- CSRF Token -->
+     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{asset('template/vendor/bootstrap/css/bootstrap.min.css')}}">
     <!-- Google fonts-->
@@ -20,6 +22,11 @@
     <link rel="stylesheet" href="{{asset('template/css/custom.css')}}">
     <!-- Leaflet CSS - For the map-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
+    <!-- Bootstrap Datepicker CSS-->
+    <link rel="stylesheet" href="{{asset('template/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css')}}">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- Favicon-->
     <link rel="shortcut icon" href="favicon.png">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
@@ -45,9 +52,15 @@
     <script src="{{asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('template/vendor/lightbox2/js/lightbox.min.js')}}"></script>
     <script src="{{asset('template/vendor/smooth-scroll/smooth-scroll.polyfills.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"> </script>
+    <!-- Bootstrap DatePicker-->
+    <script src="{{asset('template/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{asset('template/js/forms-advanced.js')}}"></script>
     <script src="{{asset('template/js/front.js')}}"></script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    @yield('custom-script')
+
   </body>
 </html>

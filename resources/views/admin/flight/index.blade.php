@@ -1,50 +1,87 @@
-@extends('layouts.layout')
+@extends('admin.layout')
 
-@section('content')
-  <!-- navbar-->
-  <header class="header sticky-top">
-    <nav class="navbar navbar-expand-lg bg-white border-bottom py-0">
-      <div class="container"><a href="#" class="navbar-brand py-1"><img src="img/logo.png" alt="" class="img-fluid"></a>
-        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><span class="fas fa-bars"></span></button>
-        <div id="navbarSupportedContent" class="collapse navbar-collapse">
-          <ul class="navbar-nav ml-auto px-3">
-            <li class="nav-item active"><a href="#intro" class="nav-link text-uppercase link-scroll">Home </a></li>
-            <li class="nav-item"><a href="#about" class="nav-link text-uppercase link-scroll">About</a></li>
-            <li class="nav-item"><a href="#services" class="nav-link text-uppercase link-scroll">Login</a></li>
-          </ul>
+@section('content2')
+<!-- Portfolio Section-->
+<section>
+    <div class="container-fluid">
+        <!-- Page Header-->
+        <header class="text-center mb-4">
+            <h2 class="lined text-uppercase mb-5">Status Penerbangan</h2>
+            <p>tes tes tes</p>
+        </header>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-      </div>
-    </nav>
-  </header>
-  <!-- Portfolio Section-->
-  <section id="id" class="pb-0">
-    <header class="text-center mb-4">
-      <h2 class="lined text-uppercase mb-5">Jadwal</h2>
-      <p>tes tes tes</p>
-    </header>
-        <div class="table-responsive mb-4">
-            <table class="table table-striped table-bordered table-condensed ">
-                <thead>
-                  <tr>
-                    <th>Tanggal</th>
-                    <th>Maskapai</th>
-                    <th>Kedatangan</th>
-                    <th>waktu</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    @foreach ($history as $item2)
-                    @if ($item1->id == $item2->destination_id)
-                    <tr>
-                        <td>{{$item2->date1}}</td>
-                        <td>{{$item2->airline->name}}</td>
-                        <td>{{$item2->time1}}</td>
-                        <td>{{$item2->time2}}</td>
-                    </tr>
-                    @endif
-                    @endforeach
-                </tbody>
-              </table>
+        @endif
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
         </div>
-  </section>
+        @endif
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="float:left"></h4>
+                        <div style="float:right">
+                            <a href="{{route('status.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tanggal</th>
+                                        <th>Maskapai</th>
+                                        <th>Dari</th>
+                                        <th>Tujuan</th>
+                                        <th>Kedatangan</th>
+                                        <th>Actual</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $x=1;?>
+                                    @foreach ($status as $item)
+                                    <tr>
+                                        <td>{{$x++}}</td>
+                                        <td>{{$item->date ?? 'tidak diketahui'}}</td>
+                                        <td>{{$item->airline->name}}</td>
+                                        <td>{{$item->city->name}}</td>
+                                        <td>{{$item->city->name}}</td>
+                                        <td>{{$item->arrival}}</td>
+                                        <td>{{$item->actual}}</td>
+                                        <td>
+                                            <form action="{{ route('status.destroy',$item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onclick="return confirm('Apakah anda yakin?')"
+                                                    class="btn btn-danger btn-sm"><i
+                                                        class="far fa-trash-alt"></i></button>
+
+                                                <a href="{{route('status.edit',$item->id)}}"
+                                                    class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                                <a href="{{route('status.show',$item->id)}}"
+                                                    class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

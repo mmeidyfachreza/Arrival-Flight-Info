@@ -8,8 +8,8 @@ class Airline extends Model
 {
     protected $fillable = ['name','codename'];
 
-    public function flight_histories()
+    public function flight_status()
     {
-        return $this->hasMany('App\FlightHistories');
+        return $this->hasMany('App\FlightStatus');
     }
 }
