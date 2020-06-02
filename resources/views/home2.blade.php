@@ -13,7 +13,7 @@
             <p class="headings-font-family text-uppercase lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 <br><a href="#" class="text-white no-anchor-style">meidy.Com</a></p>
         </div>
-    </div><a href="#services" class="scroll-btn link-scroll"><i class="fas fa-angle-double-down"></i></a>
+    </div><a href="#status" class="scroll-btn link-scroll"><i class="fas fa-angle-double-down"></i></a>
 </section>
 <!-- Navbar-->
 <!-- navbar-->
