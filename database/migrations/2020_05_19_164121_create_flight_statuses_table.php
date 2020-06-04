@@ -21,8 +21,8 @@ class CreateFlightStatusesTable extends Migration
             $table->foreign('from')->references('id')->on('cities')->onDelete('cascade');
             $table->bigInteger('to')->unsigned();
             $table->foreign('to')->references('id')->on('cities')->onDelete('cascade');
-            $table->timestamp('arrival');
-            $table->timestamp('actual')->nullable();
+            $table->dateTime('arrival');
+            $table->dateTime('actual');
             $table->integer('delay')->nullable();
             $table->timestamps();
         });
