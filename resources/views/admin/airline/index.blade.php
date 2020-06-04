@@ -60,8 +60,7 @@
 
                                                 <a href="{{route('maskapai.edit',$item->id)}}"
                                                     class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                <a href="{{route('maskapai.show',$item->id)}}"
-                                                    class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+
                                             </form>
                                         </td>
                                     </tr>

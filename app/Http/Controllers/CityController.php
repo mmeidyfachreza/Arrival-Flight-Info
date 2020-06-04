@@ -61,7 +61,7 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        $city = City::findOrFail();
+        $city = City::findOrFail($id);
         return view('admin.city.form',compact('city'));
     }
 

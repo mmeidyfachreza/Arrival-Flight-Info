@@ -40,7 +40,17 @@ class FlightStatusController extends Controller
      */
     public function store(Request $request)
     {
-        FlightStatus::create($request->all());
+
+
+        $arrival = date('Y-m-d H:i:s', strtotime($request->arrival));
+        $actual = date('Y-m-d H:i:s', strtotime($request->actual));
+        $arrival = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$arrival);
+        $actual = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$actual);
+
+        $status = FlightStatus::create($request->all());
+        $status->delay = $arrival->diffInMinutes($actual);
+        $status->save();
+
         return redirect()->route('status.index')->with('success','Berhasil menambah data');
     }
 

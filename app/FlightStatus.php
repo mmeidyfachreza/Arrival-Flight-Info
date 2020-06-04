@@ -28,12 +28,19 @@ class FlightStatus extends Model
     // {
     //     return Carbon::parse($value)->format('Y-m-d\TH:i');
     // }
-    public function scopeSearch($query,$date,$from = 0,$to = 0)
+    public function scopeSearch($query,$date,$from,$to)
     {
-        return $query->where(function($query) use ($date,$from,$to){
-            $query->whereDate('arrival','=',$date)
-                        ->orWhere('from','=',$from)
-                        ->orWhere('to','=',$to);
-        });
+
+        if ($date) {
+            $query->whereDate('arrival','=',$date);
+        }
+        if ($from) {
+            $query->where('from','=',$from);
+        }
+        if ($to) {
+            $query->where('to','=',$to);
+        }
+
+        return $query;
     }
 }

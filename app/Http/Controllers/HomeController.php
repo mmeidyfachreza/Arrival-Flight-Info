@@ -43,11 +43,15 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        $date = date('Y-m-d', strtotime($request->date));
-        // dd($date);
-        $status = FlightStatus::search($date,$request->from,$request->to)->with('fromCity')->with('toCity')->with('airline')->get();
+        if ($request->date) {
+            $request->date = date('Y-m-d', strtotime($request->date));
+        }
+
+        // dd($request->all());
+        $status = FlightStatus::search($request->date,$request->from,$request->to)->with('fromCity')->with('toCity')->with('airline')->get();
         $cities = City::all();
-        return view('home2',compact('status','cities'));
+        $search =  $request;
+        return view('home2',compact('status','cities','search'));
         //return Redirect::to( route('home') . '#status')->with(['status'=>$status,'cities'=>$$cities]);
     }
 }

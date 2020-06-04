@@ -8,10 +8,10 @@
     <div class="content h-100 d-flex align-items-center">
         <div class="container text-center text-white">
             <p class="headings-font-family text-uppercase lead">Selamat Datang di website kami</p>
-            <h1 class="text-uppercase hero-text text-white">We are<span class="font-weight-bold d-block">Agency</span>
+            <h1 class="text-uppercase hero-text text-white">Jadwal<span class="font-weight-bold d-block">Kedatangan</span>
             </h1>
-            <p class="headings-font-family text-uppercase lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                <br><a href="#" class="text-white no-anchor-style">meidy.Com</a></p>
+            <p class="headings-font-family text-uppercase lead">
+                <br><a href="#" class="text-white no-anchor-style"> </a></p>
         </div>
     </div><a href="#status" class="scroll-btn link-scroll"><i class="fas fa-angle-double-down"></i></a>
 </section>
@@ -76,13 +76,26 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <input type="date" name="date" placeholder="Masukan Nomor Induk Siswa"
-                                        class="form-control input-datepicker-autoclose"
-                                        value="{{old('date', $health->date ?? '01/01/2020')}}">
+                                        class="form-control"
+                                        value="">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            @isset ($search)
+                            <div class="form-group col-lg-6 text-center">
+                                <button type="Cari" class="btn btn-outline-primary w-100">Cari</button>
+                            </div>
+                            <div class="form-group col-lg-6 text-center">
+                                <a href="{{url('/')}}" class="btn btn-outline-danger w-100">Ulang</a>
+                            </div>
+                            @else
                             <div class="form-group col-lg-12 text-center">
                                 <button type="Cari" class="btn btn-outline-primary w-100">Cari</button>
                             </div>
+                            @endif
+
+                        </div>
                     </form>
                 </div>
             </div>
@@ -95,11 +108,10 @@
             <table class="table">
                 <thead>
                     <tr>
-
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-center">Maskapai</th>
-                        <th class="text-center">Dari</th>
-                        <th class="text-center">Tujuan</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">Airline</th>
+                        <th class="text-center">From</th>
+                        <th class="text-center">To</th>
                         <th class="text-center">Arrival</th>
                         <th class="text-center">Actual</th>
                         <th class="text-center">Status</th>
@@ -109,13 +121,13 @@
                     <?php $x=1;?>
                     @foreach ($status as $item)
                     <tr>
-                        <td class="text-center">{{date('Y-m-d', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
+                        <td class="text-center">{{date('d-m-Y', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
                         <td class="text-center">{{$item->airline->name}}</td>
                         <td class="text-center">{{$item->fromCity->name}}</td>
                         <td class="text-center">{{$item->toCity->name}}</td>
-                        <td class="text-center">{{$item->arrival}}</td>
-                        <td class="text-center">{{$item->actual}}</td>
-                        <td class="text-center">Delay 5 menit</td>
+                        <td class="text-center">{{date('d-m-Y H:i:s', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
+                        <td class="text-center">{{date('d-m-Y H:i:s', strtotime($item->actual ?? ' ')) ?? 'tidak diketahui'}}</td>
+                        <td class="text-center">Delay {{$item->delay ?? 0}} menit</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -39,7 +39,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 text-center text-lg-left">
-            <p class="mb-0 text-gray">&copy; 2019 Your name/company goes here</p>
+            <p class="mb-0 text-gray">&copy; 2020 Samarinda</p>
           </div>
           <div class="col-lg-6 text-center text-lg-right">
             <p class="mb-0 text-gray">&copy; Tes — <a href="" class="text-gray">tes</a></p>
