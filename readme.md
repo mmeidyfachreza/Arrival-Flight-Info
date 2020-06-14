@@ -2,7 +2,7 @@
 
 silahkan download project ini terlebih dahulu seperti gambar dibawah
 
-![What is this](public/image/gitpesawat.png)
+![What is this](gitpesawat.png)
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
