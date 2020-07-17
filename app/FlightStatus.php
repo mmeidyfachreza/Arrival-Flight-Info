@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FlightStatus extends Model
 {
-    protected $fillable = ['airline_id','from','to','arrival','actual','delay'];
+    protected $fillable = ['airline_id','from','to','arrival','actual','delay',];
 
     public function airline()
     {

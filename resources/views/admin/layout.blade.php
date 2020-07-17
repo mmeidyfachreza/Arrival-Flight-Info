@@ -11,9 +11,12 @@
             <li class="nav-item active"><a href="{{url('/admin')}}" class="nav-link text-uppercase link-scroll">Beranda</a>
             </li>
             <li class="nav-item"><a href="{{route('status.index')}}" class="nav-link text-uppercase link-scroll">Status Penerbangan</a></li>
+            <li class="nav-item"><a href="{{route('prediksi.index')}}" class="nav-link text-uppercase link-scroll">Prediksi</a></li>
             <li class="nav-item"><a href="{{route('kota.index')}}" class="nav-link text-uppercase link-scroll">Kota</a>
             </li>
             <li class="nav-item"><a href="{{route('maskapai.index')}}" class="nav-link text-uppercase link-scroll">Maskapai</a>
+            </li>
+            <li class="nav-item"><a href="{{route('pesawat.index')}}" class="nav-link text-uppercase link-scroll">Pesawat</a>
             </li>
             <li class="nav-item"><a href="{{route('logout')}}"
                 class="nav-link text-uppercase link-scroll" onclick="event.preventDefault();

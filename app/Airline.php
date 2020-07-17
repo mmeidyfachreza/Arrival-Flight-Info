@@ -12,4 +12,9 @@ class Airline extends Model
     {
         return $this->hasMany('App\FlightStatus');
     }
+
+    public function forecast()
+    {
+        return $this->hasMany('App\Forecast');
+    }
 }

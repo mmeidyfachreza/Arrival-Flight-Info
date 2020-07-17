@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Airline;
+use App\Airplane;
 use App\City;
 use App\FlightStatus;
+use App\Forecast;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Rap2hpoutre\FastExcel\FastExcel;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
@@ -33,6 +37,37 @@ class HomeController extends Controller
         return view('home2',compact('status','cities'));
     }
 
+    public function index2()
+    {
+        $forecast = Forecast::all();
+        return view('index',compact('forecast'));
+    }
+
+    public function getAirplane($id)
+    {
+        $airplane = Airplane::findOrFail($id);
+        return view('show_airplane',compact('airplane'));
+    }
+
+    public function getForecast()
+    {
+        $forecast = Forecast::all();
+        return view('index',compact('forecast'));
+    }
+
+    public function graphForecast($id)
+    {
+        $forecast = Forecast::findOrFail($id);
+        
+        if (request()->ajax()) {
+            $data = (new FastExcel)->import(public_path('file/'.$forecast->file),function ($line) {
+                return (integer)$line['Ramalan'];
+            })->toArray();
+            return response($data);
+        }
+        return view('detail_forecast',compact('forecast'));
+    }
+
     public function indexAdmin()
     {
         $cities = City::all();
@@ -53,5 +88,36 @@ class HomeController extends Controller
         $search =  $request;
         return view('home2',compact('status','cities','search'));
         //return Redirect::to( route('home') . '#status')->with(['status'=>$status,'cities'=>$$cities]);
+    }
+
+    public function tesExcel()
+    {
+        
+        $data = (new FastExcel)->import(public_path('file/tes.xlsx'),function ($line) {
+                return $line['Ramalan'];
+        })->toArray();
+        foreach ($data as $value) {
+            echo $value."\n";
+        }
+    }
+
+    public function tesQuerry()
+    {
+        // $bulan = FlightStatus::all()->groupBy(function($d) {
+        //     return (int)\Carbon\Carbon::parse($d->arrival)->format('m');
+        // });
+        // $bulan = FlightStatus::with('airline')->get()->groupBy([
+        //     'airline.name',
+        //     function($d) {
+        //             return (int)\Carbon\Carbon::parse($d->arrival)->format('m');
+        //         }
+        //     ]);
+        $bulan = FlightStatus::with('airline')->with('fromCity')->get()->groupBy([
+            'fromCity.name',
+            function($d) {
+                    return (int)\Carbon\Carbon::parse($d->arrival)->format('m');
+                }
+            ]);
+        dd($bulan);
     }
 }

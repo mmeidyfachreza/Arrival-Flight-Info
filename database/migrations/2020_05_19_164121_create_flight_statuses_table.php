@@ -24,6 +24,7 @@ class CreateFlightStatusesTable extends Migration
             $table->dateTime('arrival');
             $table->dateTime('actual');
             $table->integer('delay')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

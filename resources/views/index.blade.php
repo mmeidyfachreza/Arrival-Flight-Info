@@ -56,7 +56,7 @@
         <br>
         <div style="">
 
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-body">
                     <form action="{{route('search.flight')}}" method="POST">
                         @csrf
@@ -98,7 +98,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
     </div>
@@ -108,106 +108,39 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="text-center">Date</th>
-                        <th class="text-center">Airline</th>
-                        <th class="text-center">From</th>
-                        <th class="text-center">To</th>
-                        <th class="text-center">Arrival</th>
-                        <th class="text-center">Actual</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center"></th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Bulan</th>
+                        <th class="text-center">Maskapai</th>
+                        <th class="text-center">Tujuan</th>
+                        <th class="text-center">Pesawat</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $x=1;?>
-                    @foreach ($status as $item)
+                    @foreach ($forecast as $item)
                     <tr>
-                        <td class="text-center">{{date('d-m-Y', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
+                        <td class="text-center">{{$x++}}</td>
+                        <td class="text-center">{{date('F', strtotime($item->date))}}</td>
                         <td class="text-center">{{$item->airline->name}}</td>
-                        <td class="text-center">{{$item->fromCity->name}}</td>
-                        <td class="text-center">{{$item->toCity->name}}</td>
-                        <td class="text-center">{{date('d-m-Y H:i:s', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
-                        <td class="text-center">{{date('d-m-Y H:i:s', strtotime($item->actual ?? ' ')) ?? 'tidak diketahui'}}</td>
-                        <td class="text-center">Delay {{$item->delay ?? 0}} menit</td>
+                        <td class="text-center">{{$item->airplane->destination}}</td>
+                        <td class="text-center">{{$item->airplane->code}}</td>
+                        <td class="text-center">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href={{route("forecast.detail",$item->id)}} class="btn btn-warning btn-sm">Lihat Jadwal</i></a>
+                                <a href={{route("forecast.detail",$item->id)}} class="btn btn-primary btn-sm">Lihat Prediksi</i></a>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-    {{-- @foreach ($status as $data)
-    <div class="bg-white mb-4 p-4" style="width: 100%">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="icon mb-3"><i class="fas fa-plane"></i></div>
-                <h5 class="text-uppercase font-weight-bold">{{$data->airline->name}}</h4>
-            </div>
-            <div class="col-lg-2">
-                <h5 class="text-uppercase font-weight-bold">27-23-2020</h4>
-                <p class="small text-gray">Tanggal</p>
-            </div>
-            <div class="col-lg-2">
-            <h4 class="text-uppercase font-weight-bold">{{$data->fromCity->name}}</h4>
-            </div>
-            <div class="col-lg-2">
-                <h4 class="text-uppercase font-weight-bold">{{$data->toCity->name}}</h4>
-            </div>
-            <div class="col-lg-3">
-                <h5 class="text-uppercase font-weight-bold">5 menit</h4>
-                <p class="small text-gray">Keterangan Delay</p>
-            </div>
-        </div>
-    </div>
-    @endforeach --}}
 </div>
 </section>
-<!-- Text Section2-->
-<section id="about">
-    <div class="container">
-        <header class="text-center mb-5">
-            <h2 class="lined text-uppercase">Text Page</h2>
-        </header>
-        <div class="card sales-report">
-            <h2 class="display h4">Perkiraan Delay 11 hari kedepan</h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor amet officiis</p>
-            <div class="line-chart">
-              <canvas id="lineCahrt"></canvas>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Text Section-->
-<section id="about">
-    <div class="container">
-        <header class="text-center mb-5">
-            <h2 class="lined text-uppercase">Text Page</h2>
-        </header>
-        <div class="row">
-            <div class="col-lg-6">
-                <p>Able an hope of body. Any nay shyness article matters own removal nothing his forming. Gay own
-                    additions education satisfied the perpetual. If he cause manor happy. Without farther she exposed
-                    saw man led. Along on happy could cease green oh.</p>
-            </div>
-            <div class="col-lg-6">
-                <p>Betrayed cheerful declared end and. Questions we additions is extremely incommode. Next half add call
-                    them eat face. Age lived smile six defer bed their few. Had admitting concluded too behaviour him
-                    she. Of death to or to being other.</p>
-            </div>
-            <div class="col-lg-6">
-                <p>Effects present letters inquiry no an removed or friends. Desire behind latter me though in.
-                    Supposing shameless am he engrossed up additions. My possible peculiar together to. Desire so better
-                    am cannot he up before points. Remember mistaken opinions it pleasure of debating. Court front maids
-                    forty if aware their at. Chicken use are pressed removed.</p>
-            </div>
-            <div class="col-lg-6">
-                <p>Saw yet kindness too replying whatever marianne. Old sentiments resolution admiration unaffected its
-                    mrs literature. Behaviour new set existence dashwoods. It satisfied to mr commanded consisted
-                    disposing engrossed. Tall snug do of till on easy. Form not calm new fail.</p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Team Section-->
+
+
 @endsection
 
 @section('custom-script')
@@ -252,6 +185,7 @@
                 cache: true
             }
         });
+
     });
 </script>
 

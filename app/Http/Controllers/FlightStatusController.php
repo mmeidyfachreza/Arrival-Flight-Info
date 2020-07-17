@@ -6,6 +6,7 @@ use App\FlightStatus;
 use App\Airline;
 use App\City;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FlightStatusController extends Controller
 {
@@ -45,10 +46,17 @@ class FlightStatusController extends Controller
         $actual = date('Y-m-d H:i:s', strtotime($request->actual));
         $arrival = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$arrival);
         $actual = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$actual);
-
+        
         $status = FlightStatus::create($request->all());
         $status->arrival = $request->arrival;
         $status->delay = $arrival->diffInMinutes($actual);
+        
+        if ($request->hasFile('file') && $request->has('file')) {
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();            
+            $file->storeAs('/',$filename,['disk'=>'my_files']);
+            $status->file = $filename;
+        }
         $status->save();
 
         return redirect()->route('status.index')->with('success','Berhasil menambah data');
@@ -92,6 +100,15 @@ class FlightStatusController extends Controller
     public function update(Request $request, $id)
     {
         $status = FlightStatus::findOrFail($id);
+        if ($request->hasFile('file')) {
+            # code...   
+            $pathToFile = public_path('file/' . $status->file);
+            File::delete($pathToFile);
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('/',$filename,['disk'=>'my_files']);
+            $status->file =  $filename;
+        }
         $status->update($request->all());
         return redirect()->route('status.index')->with('success','Berhasil merubah data');
     }
@@ -105,6 +122,8 @@ class FlightStatusController extends Controller
     public function destroy($id)
     {
         $status=FlightStatus::find($id);
+        $pathToFile = public_path('file/' . $status->file);
+        File::delete($pathToFile);
         $status->delete();
         return redirect()->route('status.index')->with('success','Berhasil menghapus data');
     }

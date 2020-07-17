@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/','HomeController@index')->name('home');
+Route::get('/','HomeController@index2')->name('home');
+Route::get('/tested','HomeController@getForecast');
+Route::get('/tested2','HomeController@graphForecast');
+
+Route::get('/prediksi/{id}','HomeController@graphForecast')->name('forecast.detail');
 Route::get('/tes',function()
 {
     return view('auth.login2');
@@ -28,5 +32,8 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
     Route::get('/', 'HomeController@indexAdmin')->name('admin.home');
     Route::resource('status', 'FlightStatusController');
     Route::resource('maskapai', 'AirlineController');
+    Route::resource('pesawat', 'AirplaneController');
     Route::resource('kota', 'CityController');
+    Route::resource('prediksi', 'ForecastController');
 });
+

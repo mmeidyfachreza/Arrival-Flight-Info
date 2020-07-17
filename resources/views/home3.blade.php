@@ -108,27 +108,20 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="text-center">Date</th>
-                        <th class="text-center">Airline</th>
-                        <th class="text-center">From</th>
-                        <th class="text-center">To</th>
-                        <th class="text-center">Arrival</th>
-                        <th class="text-center">Actual</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center"></th>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Maskapai</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $x=1;?>
-                    @foreach ($status as $item)
+                    @foreach ($airline as $item)
                     <tr>
-                        <td class="text-center">{{date('d-m-Y', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
-                        <td class="text-center">{{$item->airline->name}}</td>
-                        <td class="text-center">{{$item->fromCity->name}}</td>
-                        <td class="text-center">{{$item->toCity->name}}</td>
-                        <td class="text-center">{{date('d-m-Y H:i:s', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
-                        <td class="text-center">{{date('d-m-Y H:i:s', strtotime($item->actual ?? ' ')) ?? 'tidak diketahui'}}</td>
-                        <td class="text-center">Delay {{$item->delay ?? 0}} menit</td>
+                        <td class="text-center">{{$x++}}</td>
+                        <td class="text-center">{{$item->name}}</td>
+                        <td class="text-center">
+                            <a href="">Pilih</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
