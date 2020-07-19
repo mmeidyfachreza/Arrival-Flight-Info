@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group col-lg-6">
                             <label>Tujuan *</label>
-                            <select name="from" class="custom-select">
+                            <select name="destination" class="custom-select">
                                 @isset ($airplane)
                                 @foreach ($cities as $item)
                                 <option value={{$item->name}} @if ($item->name == $status->destination)

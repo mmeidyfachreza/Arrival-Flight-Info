@@ -56,49 +56,6 @@
         <br>
         <div style="">
 
-            {{-- <div class="card">
-                <div class="card-body">
-                    <form action="{{route('search.flight')}}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <select class="select-dari form-control"
-                                        name="from" style="width: 100%"></select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <select class="select-tujuan form-control" style="width: 100%"
-                                        name="to"></select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <input type="date" name="date" placeholder="Masukan Nomor Induk Siswa"
-                                        class="form-control"
-                                        value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @isset ($search)
-                            <div class="form-group col-lg-6 text-center">
-                                <button type="Cari" class="btn btn-outline-primary w-100">Cari</button>
-                            </div>
-                            <div class="form-group col-lg-6 text-center">
-                                <a href="{{url('/')}}" class="btn btn-outline-danger w-100">Ulang</a>
-                            </div>
-                            @else
-                            <div class="form-group col-lg-12 text-center">
-                                <button type="Cari" class="btn btn-outline-primary w-100">Cari</button>
-                            </div>
-                            @endif
-
-                        </div>
-                    </form>
-                </div>
-            </div> --}}
         </div>
 
     </div>

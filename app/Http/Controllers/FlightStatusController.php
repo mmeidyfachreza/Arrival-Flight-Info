@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\FlightStatus;
 use App\Airline;
+use App\Airplane;
 use App\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class FlightStatusController extends Controller
 {
@@ -126,6 +128,38 @@ class FlightStatusController extends Controller
         File::delete($pathToFile);
         $status->delete();
         return redirect()->route('status.index')->with('success','Berhasil menghapus data');
+    }
+
+    public function import(Request $request)
+    {
+        if ($request->hasFile('file') && $request->has('file')) {
+            $file = $request->file('file');
+            $data = (new FastExcel)->import($file,function ($line) {
+                $airplane = Airplane::where('code','=',$line['Maskapai'])->first();
+                $from = City::where('name','=','Bandung')->first();
+                $to = City::where('name','=',$line['Tujuan'])->first();
+                $arrival = date('Y-m-d H:i:s', strtotime($line['Arrival']->format('Y-m-d H:i:s')));
+                $actual = date('Y-m-d H:i:s', strtotime($line['Aktual']->format('Y-m-d H:i:s')));
+                $arrival = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$arrival);
+                $actual = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$actual);
+                $a = FlightStatus::create([
+                    'airplane_id' => $airplane->id,
+                    'from' => $from->id,
+                    'to' => $to->id,
+                    'arrival' => $line['Arrival']->format('Y-m-d H:i:s'),
+                    'actual' => $line['Aktual']->format('Y-m-d H:i:s'),
+                    'delay' => $arrival->diffInMinutes($actual),
+                ]);
+                
+            });
+            
+        }
+        echo "success";
+    }
+
+    public function indexImport()
+    {
+        return view('admin.flight.import');
     }
 
     public function search(Request $request)

@@ -53,6 +53,7 @@ class ForecastController extends Controller
             $file->storeAs('/',$filename,['disk'=>'my_files']);
             $forecast->file = $filename;
         }
+        
         $forecast->save();
         return redirect()->route('prediksi.index')->with('success','Berhasil menambah data');
     }
@@ -77,9 +78,9 @@ class ForecastController extends Controller
     public function edit($id)
     {
         $forecast = Forecast::findOrFail($id);
-        $airline = Airline::select('name')->get();
-        $airplane = Airplane::select('code')->get();
-        return view('admin.forecast.form',compact('airline','airplane','forecast'));
+        $airlines = Airline::select('id','name')->get();
+        $airplanes = Airplane::select('id','code','destination')->get();
+        return view('admin.forecast.form',compact('airlines','airplanes','forecast'));
     }
 
     /**
@@ -91,7 +92,11 @@ class ForecastController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $forecast = Forecast::findOrFail($id);
+        $forecast->airline_id = $request->airline_id;
+        $forecast->airplane_id = $request->airplane_id;
+        $forecast->date = $request->date."-01";
         if ($request->hasFile('file')) {
             # code...   
             $pathToFile = public_path('file/' . $forecast->file);
@@ -101,7 +106,8 @@ class ForecastController extends Controller
             $file->storeAs('/',$filename,['disk'=>'my_files']);
             $forecast->file =  $filename;
         }
-        $forecast->update($request->all());
+        dd($forecast);
+        $forecast->update();
         return redirect()->route('prediksi.index')->with('success','Berhasil merubah data');
     }
 

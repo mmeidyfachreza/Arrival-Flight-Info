@@ -53,7 +53,7 @@
                                     <tr>
                                         <td>{{$x++}}</td>
                                         <td>{{date('Y-m-d', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
-                                        <td>{{$item->airline->name}}</td>
+                                        <td>{{$item->airplane->code}}</td>
                                         <td>{{$item->fromCity->name}}</td>
                                         <td>{{$item->toCity->name}}</td>
                                         <td>{{$item->arrival}}</td>

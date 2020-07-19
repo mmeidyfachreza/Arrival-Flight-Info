@@ -54,9 +54,19 @@
                                         <td class="text-center">{{$item->airline->name}}</td>
                                         <td class="text-center">{{$item->airplane->destination}}</td>
                                         <td class="text-center">{{$item->airplane->code}}</td>
-                                        <td class="text-center">
-                                            <a href={{route("forecast.detail",$item->id)}} class="btn btn-warning btn-sm">Lihat Jadwal</i></a>
-                                <a href={{route("forecast.detail",$item->id)}} class="btn btn-primary btn-sm">Lihat Prediksi</i></a>
+                                        <td>
+                                            <form action="{{ route('prediksi.destroy',$item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onclick="return confirm('Apakah anda yakin?')"
+                                                    class="btn btn-danger btn-sm"><i
+                                                        class="far fa-trash-alt"></i></button>
+
+                                                <a href="{{route('prediksi.edit',$item->id)}}"
+                                                    class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="{{route('status.show',$item->id)}}"
+                                                    class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> --}}
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

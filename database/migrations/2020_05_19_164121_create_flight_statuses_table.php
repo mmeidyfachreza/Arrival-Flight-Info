@@ -15,8 +15,8 @@ class CreateFlightStatusesTable extends Migration
     {
         Schema::create('flight_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('airline_id')->unsigned();
-            $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade');
+            $table->bigInteger('airplane_id')->unsigned();
+            $table->foreign('airplane_id')->references('id')->on('airplanes')->onDelete('cascade');
             $table->bigInteger('from')->unsigned();
             $table->foreign('from')->references('id')->on('cities')->onDelete('cascade');
             $table->bigInteger('to')->unsigned();
@@ -37,7 +37,7 @@ class CreateFlightStatusesTable extends Migration
     public function down()
     {
         Schema::table('flight_statuses', function (Blueprint $table) {
-            $table->dropForeign(['airline_id']);
+            $table->dropForeign(['airplane_id']);
             $table->dropForeign(['from']);
             $table->dropForeign(['to']);
         });

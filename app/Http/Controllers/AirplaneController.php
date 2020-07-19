@@ -39,7 +39,7 @@ class AirplaneController extends Controller
     public function store(Request $request)
     {
         Airplane::create($request->all());
-        return redirect()->route('airplane.index')->with('success','Berhasil menambah data');
+        return redirect()->route('pesawat.index')->with('success','Berhasil menambah data');
     }
 
     /**
@@ -78,7 +78,7 @@ class AirplaneController extends Controller
     {
         $airplane=Airplane::findOrFail($id);
         $airplane->update($request->all());
-        return redirect()->route('airplane.index')->with('success','Berhasil merubah data');
+        return redirect()->route('pesawat.index')->with('success','Berhasil merubah data');
     }
 
     /**
@@ -91,6 +91,6 @@ class AirplaneController extends Controller
     {
         $airplane=Airplane::findOrFail($id);
         $airplane->delete();
-        return redirect()->route('airplane.index')->with('success','Berhasil menghapus data');
+        return redirect()->route('pesawat.index')->with('success','Berhasil menghapus data');
     }
 }
