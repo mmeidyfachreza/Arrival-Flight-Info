@@ -34,7 +34,6 @@ class HomeController extends Controller
     {
         $cities = City::all();
         $status = FlightStatus::with('fromCity')->with('toCity')->with('airline')->get();
-        dd($status);
         return view('home2',compact('status','cities'));
     }
 

@@ -29,6 +29,7 @@
                     <li class="nav-item active"><a href="#intro" class="nav-link text-uppercase link-scroll">Home </a>
                     </li>
                     <li class="nav-item"><a href="#about" class="nav-link text-uppercase link-scroll">About</a></li>
+                    <li class="nav-item"><a href="{{route('list.prediksi')}}" class="nav-link text-uppercase link-scroll">Prediksi</a></li>
                     @guest
                     <li class="nav-item"><a href="{{route('login')}}"
                         class="nav-link text-uppercase link-scroll">Login</a></li>
