@@ -152,9 +152,9 @@ class FlightStatusController extends Controller
                 ]);
                 
             });
-            
-        }
-        echo "success";
+            return redirect()->route('status.index')->with('success','Berhasil menambah data');
+        }else
+        echo "gagal";
     }
 
     public function indexImport()

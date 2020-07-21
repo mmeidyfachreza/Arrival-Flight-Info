@@ -12,13 +12,14 @@
 */
 
 Route::get('/','HomeController@index2')->name('home');
-Route::get('/tested3','HomeController@getForecast');
-Route::get('/tested2','HomeController@graphForecast');
+Route::get('/prediksi/grafik/{id}','HomeController@graphForecast')->name('forecast.detail');
+Route::get('/tested3','HomeController@index');
+// Route::get('/tested2','HomeController@graphForecast');
 
 
 Route::get('/tes',function()
 {
-    return view('auth.login2');
+    return view('home3');
 });
 
 Route::get('/cari', 'CityController@loadData');
@@ -35,7 +36,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
     Route::resource('pesawat', 'AirplaneController');
     Route::resource('kota', 'CityController');
     Route::resource('prediksi', 'ForecastController');
-    Route::get('prediksi/{id}','HomeController@graphForecast')->name('forecast.detail');
+    
     Route::get('import','FlightStatusController@indexImport')->name('status.index.import');
     Route::post('import','FlightStatusController@import')->name('status.import');
 });

@@ -23,7 +23,7 @@
                                 @foreach ($airlines as $item)
                                 <option value={{$item->id}} @if ($item->id == $forecast->ariline_id)
                                     selected
-                                    @endif>{{$item->name}}</option>
+                                @endif>{{$item->name}}</option>
                                 @endforeach
                                 @else
                                 <option value='' selected disabled>--Pilih Maskapai--</option>

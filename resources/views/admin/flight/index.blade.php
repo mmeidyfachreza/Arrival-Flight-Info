@@ -29,7 +29,11 @@
                     <div class="card-header">
                         <h4 style="float:left"></h4>
                         <div style="float:right">
-                            <a href="{{route('status.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{{route('status.index.import')}}" class="btn btn-success btn-sm">Import Excel</a>
+                                <a href="{{route('status.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="card-body">
