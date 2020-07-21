@@ -52,7 +52,7 @@
 <section id="status" class="bg-gray">
     <div class="container">
         <header class="text-center mb-5">
-            <h2 class="lined text-uppercase">Jadwal kedatangan</h2>
+            <h2 class="lined text-uppercase">Prediksi</h2>
         </header>
         <br>
         <div style="">
