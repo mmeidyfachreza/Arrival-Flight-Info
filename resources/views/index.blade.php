@@ -85,7 +85,7 @@
                         <td class="text-center">{{$item->airplane->code}}</td>
                         <td class="text-center">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href={{route("forecast.detail",$item->id)}} class="btn btn-warning btn-sm">Lihat Jadwal</i></a>
+                                {{-- <a href={{route("forecast.detail",$item->id)}} class="btn btn-warning btn-sm">Lihat Jadwal</i></a> --}}
                                 <a href={{route("forecast.detail",$item->id)}} class="btn btn-primary btn-sm">Lihat Prediksi</i></a>
                             </div>
                         </td>
