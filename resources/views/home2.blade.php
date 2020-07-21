@@ -110,7 +110,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">Date</th>
-                        <th class="text-center">Airline</th>
+                        <th class="text-center">Airplane</th>
                         <th class="text-center">From</th>
                         <th class="text-center">To</th>
                         <th class="text-center">Arrival</th>
@@ -124,7 +124,7 @@
                     @foreach ($status as $item)
                     <tr>
                         <td class="text-center">{{date('d-m-Y', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>
-                        <td class="text-center">{{$item->airline->name}}</td>
+                        <td class="text-center">{{$item->airplane->code}}</td>
                         <td class="text-center">{{$item->fromCity->name}}</td>
                         <td class="text-center">{{$item->toCity->name}}</td>
                         <td class="text-center">{{date('d-m-Y H:i:s', strtotime($item->arrival ?? ' ')) ?? 'tidak diketahui'}}</td>

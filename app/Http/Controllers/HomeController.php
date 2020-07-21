@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function index()
     {
         $cities = City::all();
-        $status = FlightStatus::with('fromCity')->with('toCity')->with('airline')->get();
+        $status = FlightStatus::with('fromCity')->with('toCity')->with('airplane')->get();
         return view('home2',compact('status','cities'));
     }
 
