@@ -21,6 +21,7 @@ class CreateForecastsTable extends Migration
             $table->bigInteger('airplane_id')->unsigned();
             $table->foreign('airplane_id')->references('id')->on('airplanes')->onDelete('cascade');
             $table->string('file')->nullable();
+            $table->string('file2')->nullable();
             $table->timestamps();
         });
     }

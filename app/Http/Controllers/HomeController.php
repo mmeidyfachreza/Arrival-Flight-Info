@@ -60,16 +60,46 @@ class HomeController extends Controller
         $forecast = Forecast::findOrFail($id);
         
         if (request()->ajax()) {
-            $data = (new FastExcel)->import(public_path('file/'.$forecast->file),function ($line) {
+            $data_mt = array("minitab" => (new FastExcel)->import(public_path('file/'.$forecast->file),function ($line) {
                 return (integer)$line['Ramalan'];
-            })->toArray();
+            })->toArray());
             
-            return response($data);
+            //python
+            // $pyhton = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
+            $pyhton = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
+            $pyhton = explode("\n",$pyhton);
+            $data_py = [];
+            foreach ($pyhton as $key => $value) {
+                array_push($data_py,(integer)round((float)$value));
+            }
+            array_pop($data_py);
+            $data_py = array("python" => $data_py);
+            //endPython
+
+            return response(array_merge($data_mt,$data_py));
         }
         return view('detail_forecast',compact('forecast'));
     }
 
-    public function indexAdmin()
+    public function graphForecast2($id)
+    {
+        $forecast = Forecast::findOrFail($id);
+        
+        if (request()->ajax()) {
+            $pyhton = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
+            $pyhton = explode("\n",$pyhton);
+            $data_py = [];
+            foreach ($pyhton as $key => $value) {
+                array_push($data_py,(integer)round((float)$value));
+            }
+            array_pop($data_py);
+            $data_py = array("python" => $data_py);
+            return response($data_py);
+        }
+        return view('detail_forecast',compact('forecast'));
+    }
+
+    public function indexAdmin ()
     {
         $cities = City::all();
         $status = FlightStatus::with('fromCity')->with('toCity')->with('airline')->get();

@@ -53,7 +53,7 @@
 <section id="status" class="bg-gray">
     <div class="container">
         <header class="text-center mb-5">
-            <h2 class="lined text-uppercase">Perkiraan 11 periode kedepan</h2>
+            <h2 class="lined text-uppercase">Perkiraan 11 periode kedepan (Minitab)</h2>
         </header>
         <br>
     </div>
@@ -61,7 +61,26 @@
     <div class="bg-white mb-4 p-4" style="width: 100%">
         <div class="card sales-report">
             <div class="line-chart card-body">
-                <canvas id="lineChart"></canvas>
+                <canvas id="lineChartMini"></canvas>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+<section id="status" class="bg-gray">
+    <div class="container">
+        <header class="text-center mb-5">
+            <h2 class="lined text-uppercase">Perkiraan 11 periode kedepan (Python)</h2>
+        </header>
+        <br>
+    </div>
+    <br>
+    <div class="bg-white mb-4 p-4" style="width: 100%">
+        <div class="card sales-report">
+            <div class="line-chart card-body">
+                <canvas id="lineChartPy"></canvas>
             </div>
         </div>
     </div>
@@ -74,14 +93,14 @@
 @section('custom-script')
 <script type="text/javascript">
     $(document).ready(function () {
-        var LINECHART = $('#lineChart');
+        var LINECHART = $('#lineChartMini');
+        var LINECHART2 = $('#lineChartPy');
         $.ajax({
             url: window.location.href,
             //url: "https://sikeswav2.herokuapp.com/admin",
             method: "GET",
             success: function (data) {
                 console.log(data)
-                var prediksi = [];
 
                 var myLineChart = new Chart(LINECHART, {
                     type: 'bar',
@@ -115,13 +134,53 @@
                             pointHoverBorderWidth: 2,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: data,
+                            data: data.minitab,
+                            spanGaps: false,
+                        }]
+                    }
+                });
+
+                var myLineChart2 = new Chart(LINECHART2, {
+                    type: 'bar',
+                    options: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    data: {
+                        labels: ["periode 1", "periode 2", "periode 3", "periode 4",
+                            "periode 5", "periode 6", "periode 7", "periode 8",
+                            "periode 9", "periode 10", "periode 11"
+                        ],
+                        datasets: [{
+                            label: "Menit",
+                            fill: true,
+                            lineTension: 0.3,
+                            backgroundColor: "rgba(75,192,192,0.4)",
+                            borderColor: "rgba(75,192,192,1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            borderWidth: 1,
+                            pointBorderColor: "rgba(75,192,192,1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: data.python,
                             spanGaps: false,
                         }]
                     }
                 });
             }
         });
+
+        
     });
 
 </script>

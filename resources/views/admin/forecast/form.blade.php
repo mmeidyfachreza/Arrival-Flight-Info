@@ -62,6 +62,12 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>CSV *</label>
+                            <input type="file" name="file2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-lg-12">
                             <button type="submit" class="btn btn-outline-primary w-100">Simpan</button>
                         </div>

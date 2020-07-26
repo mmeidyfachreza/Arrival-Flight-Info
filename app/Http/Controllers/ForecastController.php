@@ -53,6 +53,13 @@ class ForecastController extends Controller
             $file->storeAs('/',$filename,['disk'=>'my_files']);
             $forecast->file = $filename;
         }
+
+        if ($request->hasFile('file2') && $request->has('file2')) {
+            $file = $request->file('file2');
+            $filename = time() . '.' . $file->getClientOriginalExtension();            
+            $file->storeAs('/',$filename,['disk'=>'my_files']);
+            $forecast->file2 = $filename;
+        }
         
         $forecast->save();
         return redirect()->route('prediksi.index')->with('success','Berhasil menambah data');
@@ -106,7 +113,16 @@ class ForecastController extends Controller
             $file->storeAs('/',$filename,['disk'=>'my_files']);
             $forecast->file =  $filename;
         }
-        dd($forecast);
+        if ($request->hasFile('file2')) {
+            # code...   
+            $pathToFile = public_path('file/' . $forecast->file);
+            File::delete($pathToFile);
+            $file = $request->file('file2');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('/',$filename,['disk'=>'my_files']);
+            $forecast->file2 =  $filename;
+        }
+        
         $forecast->update();
         return redirect()->route('prediksi.index')->with('success','Berhasil merubah data');
     }
@@ -124,5 +140,21 @@ class ForecastController extends Controller
         File::delete($pathToFile);
         $forecast->delete();
         return redirect()->route('prediksi.index')->with('success','Berhasil menghapus data');
+    }
+
+    public function tes3()
+    {
+        //$tes = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe D:\Website\backend\python\hello\testing.py D:\Website\testing.csv');
+     
+        $tes = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . "testing.csv"));
+        $tes = explode("\n",$tes);
+        $data = [];
+        foreach ($tes as $key => $value) {
+            array_push($data,(integer)round((float)$value));
+        }
+        array_pop($data);
+        $data = array("python" => $data);
+        dd($data);
+        //dd(explode("\n",$tes));
     }
 }
