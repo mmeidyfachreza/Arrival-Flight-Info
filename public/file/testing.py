@@ -31,7 +31,7 @@ for t in range(len(test)):
 	obs = test[t]
 	history.append(obs)
 	# print('predicted=%f, expected=%f' % (yhat, obs))
-	print('%f' % (yhat))
+	print('%f|%f' % (yhat, obs))
 # error = mean_squared_error(test, predictions)
 # print('Test MSE: %.3f' % error)
 # print(predictions)

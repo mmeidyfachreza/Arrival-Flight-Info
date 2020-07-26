@@ -66,17 +66,24 @@ class HomeController extends Controller
             
             //python
             // $pyhton = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
-            $pyhton = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
-            $pyhton = explode("\n",$pyhton);
-            $data_py = [];
-            foreach ($pyhton as $key => $value) {
-                array_push($data_py,(integer)round((float)$value));
+            $python = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
+            $python = explode("\n",$python);
+            $data = [];
+            $python1 = [];
+            $python2 = [];
+            array_pop($python);
+            foreach ($python as $key => $value) {
+                array_push($data,explode("|",$value));
             }
-            array_pop($data_py);
-            $data_py = array("python" => $data_py);
+            foreach ($data as $key => $value) {
+                array_push($python1,(integer)round((float)$value[0]));
+                array_push($python2,(integer)round((float)$value[1]));
+            }
+            $python1 = array("python1" => $python1);
+            $python2 = array("python2" => $python2);
             //endPython
 
-            return response(array_merge($data_mt,$data_py));
+            return response(array_merge($data_mt,$python1,$python2));
         }
         return view('detail_forecast',compact('forecast'));
     }

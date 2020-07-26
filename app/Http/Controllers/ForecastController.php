@@ -146,13 +146,26 @@ class ForecastController extends Controller
     {
         //$tes = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe D:\Website\backend\python\hello\testing.py D:\Website\testing.csv');
      
-        $tes = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . "testing.csv"));
-        $tes = explode("\n",$tes);
+        $python = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . "testing.csv"));
+        $python = explode("\n",$python);
         $data = [];
-        foreach ($tes as $key => $value) {
-            array_push($data,(integer)round((float)$value));
+        $python1 = [];
+        $python2 = [];
+        array_pop($python);
+        foreach ($python as $key => $value) {
+            array_push($data,explode("|",$value));
         }
-        array_pop($data);
+        foreach ($data as $key => $value) {
+            array_push($python1,(integer)round((float)$value[0]));
+            array_push($python2,(integer)round((float)$value[1]));
+        }
+        $python1 = array("python1" => $python1);
+        $python2 = array("python2" => $python2);
+        dd(array_merge($python1,$python2));
+        // foreach ($tes as $key => $value) {
+        //     array_push($data,(integer)round((float)$value));
+        // }
+        
         $data = array("python" => $data);
         dd($data);
         //dd(explode("\n",$tes));

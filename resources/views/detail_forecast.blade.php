@@ -103,7 +103,7 @@
                 console.log(data)
 
                 var myLineChart = new Chart(LINECHART, {
-                    type: 'bar',
+                    type: 'line',
                     options: {
                         legend: {
                             display: false
@@ -116,7 +116,7 @@
                         ],
                         datasets: [{
                             label: "Menit",
-                            fill: true,
+                            fill: false,
                             lineTension: 0.3,
                             backgroundColor: "rgba(75,192,192,0.4)",
                             borderColor: "rgba(75,192,192,1)",
@@ -132,6 +132,7 @@
                             pointHoverBackgroundColor: "rgba(75,192,192,1)",
                             pointHoverBorderColor: "rgba(220,220,220,1)",
                             pointHoverBorderWidth: 2,
+                            pointBorderWidth: 5,
                             pointRadius: 1,
                             pointHitRadius: 10,
                             data: data.minitab,
@@ -141,7 +142,7 @@
                 });
 
                 var myLineChart2 = new Chart(LINECHART2, {
-                    type: 'bar',
+                    type: 'line',
                     options: {
                         legend: {
                             display: false
@@ -153,8 +154,31 @@
                             "periode 9", "periode 10", "periode 11"
                         ],
                         datasets: [{
-                            label: "Menit",
-                            fill: true,
+                            label: "Predicted",
+                            fill: false,
+                            lineTension: 0.3,
+                            backgroundColor: "rgba(75,192,192,0.4)",
+                            borderColor: "rgba(255,0,0,1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            borderWidth: 1,
+                            pointBorderColor: "rgba(255,0,0,1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                            pointHoverBorderColor: "rgba(255,0,0,1)",
+                            pointHoverBorderWidth: 2,
+                            pointBorderWidth: 5,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: data.python1,
+                            spanGaps: false,
+                        },{
+                            label: "Expected",
+                            fill: false,
                             lineTension: 0.3,
                             backgroundColor: "rgba(75,192,192,0.4)",
                             borderColor: "rgba(75,192,192,1)",
@@ -170,9 +194,10 @@
                             pointHoverBackgroundColor: "rgba(75,192,192,1)",
                             pointHoverBorderColor: "rgba(220,220,220,1)",
                             pointHoverBorderWidth: 2,
+                            pointBorderWidth: 5,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: data.python,
+                            data: data.python2,
                             spanGaps: false,
                         }]
                     }
