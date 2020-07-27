@@ -61,12 +61,12 @@ class HomeController extends Controller
         
         if (request()->ajax()) {
             $data_mt = array("minitab" => (new FastExcel)->import(public_path('file/'.$forecast->file),function ($line) {
-                return (integer)$line['Ramalan'];
+                return (integer)$line['PREDIKSI'];
             })->toArray());
             
             //python
             // $pyhton = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
-            $python = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2));
+            $python = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2).' '.$forecast->a.' '.$forecast->b.' '.$forecast->c);
             $python = explode("\n",$python);
             $data = [];
             $python1 = [];
@@ -158,4 +158,17 @@ class HomeController extends Controller
             ]);
         dd($bulan);
     }
+
+    public function tes4()
+    {
+        //$tes = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe D:\Website\backend\python\hello\testing.py D:\Website\testing.csv');
+        $forecast = Forecast::findOrFail(5);
+        $data_mt = array("minitab" => (new FastExcel)->import(public_path('file/'.$forecast->file),function ($line) {
+            return (integer)$line['PREDIKSI'];
+        })->toArray());
+        dd($forecast);
+        
+    }
 }
+
+

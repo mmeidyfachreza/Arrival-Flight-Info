@@ -12,18 +12,21 @@ def parser(x):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('file', type=pathlib.Path)
+parser.add_argument('a', type=int)
+parser.add_argument('b', type=int)
+parser.add_argument('c', type=int)
 args = parser.parse_args()
 
 with args.file.open('r') as file:
 	series = read_csv(file, parse_dates = ['Tanggal'], index_col = ['Tanggal'])
 
 X = series.values
-size = int(len(X) * 0.66)
+size = int(len(X) * 0.5)
 train, test = X[0:size], X[size:len(X)]
 history = [x for x in train]
 predictions = list()
 for t in range(len(test)):
-	model = ARIMA(history, order=(1,1,0))
+	model = ARIMA(history, order=(args.a, args.b, args.c))
 	model_fit = model.fit(disp=0)
 	output = model_fit.forecast()
 	yhat = output[0]

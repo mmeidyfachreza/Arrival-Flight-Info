@@ -16,6 +16,7 @@ Route::get('/lihat-prediksi','HomeController@index2')->name('list.prediksi');
 Route::get('/prediksi/grafik/{id}','HomeController@graphForecast')->name('forecast.detail');
 Route::get('/tested3','HomeController@index');
 Route::get('/csv','ForecastController@tes3');
+Route::get('/excel','HomeController@tes4');
 // Route::get('/tested2','HomeController@graphForecast');
 
 

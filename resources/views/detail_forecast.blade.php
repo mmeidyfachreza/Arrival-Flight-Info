@@ -53,7 +53,7 @@
 <section id="status" class="bg-gray">
     <div class="container">
         <header class="text-center mb-5">
-            <h2 class="lined text-uppercase">Perkiraan 11 periode kedepan (Minitab)</h2>
+            <h2 class="lined text-uppercase">Perkiraan 15 periode kedepan (Minitab)</h2>
         </header>
         <br>
     </div>
@@ -72,7 +72,7 @@
 <section id="status" class="bg-gray">
     <div class="container">
         <header class="text-center mb-5">
-            <h2 class="lined text-uppercase">Perkiraan 11 periode kedepan (Python)</h2>
+            <h2 class="lined text-uppercase">Perkiraan 15 periode kedepan (Python)</h2>
         </header>
         <br>
     </div>
@@ -112,7 +112,7 @@
                     data: {
                         labels: ["periode 1", "periode 2", "periode 3", "periode 4",
                             "periode 5", "periode 6", "periode 7", "periode 8",
-                            "periode 9", "periode 10", "periode 11"
+                            "periode 9", "periode 10", "periode 11", "periode 12", "periode 13", "periode 14", "periode 15"
                         ],
                         datasets: [{
                             label: "Menit",
@@ -145,16 +145,16 @@
                     type: 'line',
                     options: {
                         legend: {
-                            display: false
+                            display: true
                         }
                     },
                     data: {
                         labels: ["periode 1", "periode 2", "periode 3", "periode 4",
                             "periode 5", "periode 6", "periode 7", "periode 8",
-                            "periode 9", "periode 10", "periode 11"
+                            "periode 9", "periode 10", "periode 11", "periode 12", "periode 13", "periode 14", "periode 15"
                         ],
                         datasets: [{
-                            label: "Predicted",
+                            label: "Prediksi",
                             fill: false,
                             lineTension: 0.3,
                             backgroundColor: "rgba(75,192,192,0.4)",
@@ -177,7 +177,7 @@
                             data: data.python1,
                             spanGaps: false,
                         },{
-                            label: "Expected",
+                            label: "Aktual",
                             fill: false,
                             lineTension: 0.3,
                             backgroundColor: "rgba(75,192,192,0.4)",

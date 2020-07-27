@@ -66,6 +66,22 @@
                             <label>CSV *</label>
                             <input type="file" name="file2" class="form-control">
                         </div>
+                        <div class="form-group col-lg-6">
+                            <div class="row">
+                                <div class="form-group col-lg-4">
+                                    <label>order a *</label>
+                                    <input type="number" min="0" name="a" class="form-control" value="{{old('a', $forecast->a ?? 1)}}">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label>order b *</label>
+                                    <input type="number" min="0" name="b" class="form-control" value="{{old('b', $forecast->b ?? 1)}}">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label>order c *</label>
+                                    <input type="number" min="0" name="c" class="form-control" value="{{old('c', $forecast->c ?? 0)}}">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">

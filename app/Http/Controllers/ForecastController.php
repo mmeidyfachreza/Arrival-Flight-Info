@@ -46,6 +46,9 @@ class ForecastController extends Controller
         $forecast = new Forecast();
         $forecast->airline_id = $request->airline_id;
         $forecast->airplane_id = $request->airplane_id;
+        $forecast->a = $request->a;
+        $forecast->b = $request->b;
+        $forecast->c = $request->c;
         $forecast->date = $request->date."-01";
         if ($request->hasFile('file') && $request->has('file')) {
             $file = $request->file('file');
@@ -103,6 +106,9 @@ class ForecastController extends Controller
         $forecast = Forecast::findOrFail($id);
         $forecast->airline_id = $request->airline_id;
         $forecast->airplane_id = $request->airplane_id;
+        $forecast->a = $request->a;
+        $forecast->b = $request->b;
+        $forecast->c = $request->c;
         $forecast->date = $request->date."-01";
         if ($request->hasFile('file')) {
             # code...   
@@ -145,8 +151,8 @@ class ForecastController extends Controller
     public function tes3()
     {
         //$tes = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe D:\Website\backend\python\hello\testing.py D:\Website\testing.csv');
-     
-        $python = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . "testing.csv"));
+        $forecast = Forecast::findOrFail(5);
+        $python = shell_exec('C:\Users\4SUS\AppData\Local\Programs\Python\Python38-32\python.exe '.public_path('file/' . "testing.py").' '.public_path('file/' . $forecast->file2).' '.$forecast->a.' '.$forecast->b.' '.$forecast->c);
         $python = explode("\n",$python);
         $data = [];
         $python1 = [];
@@ -161,7 +167,7 @@ class ForecastController extends Controller
         }
         $python1 = array("python1" => $python1);
         $python2 = array("python2" => $python2);
-        dd(array_merge($python1,$python2));
+        dd($data);
         // foreach ($tes as $key => $value) {
         //     array_push($data,(integer)round((float)$value));
         // }
@@ -170,4 +176,6 @@ class ForecastController extends Controller
         dd($data);
         //dd(explode("\n",$tes));
     }
+
+    
 }
