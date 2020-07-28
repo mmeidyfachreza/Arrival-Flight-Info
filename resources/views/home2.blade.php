@@ -162,21 +162,6 @@
     @endforeach --}}
 </div>
 </section>
-<!-- Text Section2-->
-<section id="about">
-    <div class="container">
-        <header class="text-center mb-5">
-            <h2 class="lined text-uppercase">Text Page</h2>
-        </header>
-        <div class="card sales-report">
-            <h2 class="display h4">Perkiraan Delay 11 hari kedepan</h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor amet officiis</p>
-            <div class="line-chart">
-              <canvas id="lineCahrt"></canvas>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- Text Section-->
 <section id="about">
     <div class="container">
