@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <input type="date" name="date" placeholder="Masukan Nomor Induk Siswa"
+                                    <input type="date" name="date"
                                         class="form-control"
                                         value="">
                                 </div>

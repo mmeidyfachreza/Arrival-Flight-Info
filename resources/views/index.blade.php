@@ -66,7 +66,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="text-center">#</th>
+                        <th class="text-center">No</th>
                         <th class="text-center">Bulan</th>
                         <th class="text-center">Maskapai</th>
                         <th class="text-center">Tujuan</th>
